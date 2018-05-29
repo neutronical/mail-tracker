@@ -118,7 +118,7 @@ class MailTracker implements \Swift_Events_SendListener {
      */
     protected function createTrackers($message)
     {
-        foreach($message->getTo() as $to_email=>$to_name) {
+		foreach($message->getTo() as $to_email=>$to_name) {
             foreach($message->getFrom() as $from_email=>$from_name) {
                 $headers = $message->getHeaders();
                 if($headers->get('X-No-Track')) {
@@ -148,8 +148,13 @@ class MailTracker implements \Swift_Events_SendListener {
                     }
                 }
 
+				$customer_id = $headers->get('x-app-customer') ? $headers->get('x-app-customer')->getFieldBody() : null;
+				$email_id = $headers->get('x-app-email') ? $headers->get('x-app-email')->getFieldBody() : null;
+
                 $tracker = SentEmail::create([
                     'hash'=>$hash,
+					'customer_id' => $customer_id,
+					'email_id' => $email_id,
                     'headers'=>$headers->toString(),
                     'sender'=>$from_name." <".$from_email.">",
                     'recipient'=>$to_name.' <'.$to_email.'>',

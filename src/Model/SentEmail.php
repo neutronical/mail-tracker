@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property string $hash
  * @property string $headers
+ * @property string $customer_id
+ * @property string $email_id
  * @property string $sender
  * @property string $recipient
  * @property string $subject
@@ -20,6 +22,8 @@ class SentEmail extends Model
 {
     protected $fillable = [
     	'hash',
+		'customer_id',
+		'email_id',
     	'headers',
     	'sender',
     	'recipient',
