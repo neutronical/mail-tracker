@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 return [
     /**
@@ -30,6 +30,7 @@ return [
     'admin-route' => [
         'prefix' => 'email-manager',
         'middleware' => ['web','super'],
+		'register' => true
     ],
 
     /**
